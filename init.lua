@@ -1,0 +1,5 @@
+require("settings.global")
+require("settings.options")
+require("settings.autocommands")
+require("settings.maps")
+require("settings.plugins")
