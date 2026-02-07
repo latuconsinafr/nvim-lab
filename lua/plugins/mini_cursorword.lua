@@ -3,7 +3,7 @@ return {
   event = "CursorHold",
   config = function()
     require("mini.cursorword").setup({
-      delay = 500,
+      delay = 350,
     })
 
     vim.api.nvim_set_hl(0, "MiniCursorword", { link = "Visual" })

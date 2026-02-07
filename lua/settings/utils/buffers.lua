@@ -89,7 +89,6 @@ end
 --- If last normal buffer, falls back to special buffer or quits Neovim
 function M.close_current_buffer()
   local current = vim.api.nvim_get_current_buf()
-  local current_win = vim.api.nvim_get_current_win()
 
   -- If current buffer is special (sidebar like NvimTree)
   if M.is_special_buffer(current) then

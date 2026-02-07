@@ -3,16 +3,16 @@ return {
   dependencies = {
     "nvim-tree/nvim-web-devicons"
   },
-  cmd = "FzfLua",               
+  cmd = "FzfLua",
   keys = {
-    { "<leader>ff",  "<cmd>FzfLua files<CR>",           desc = "Find Files" },
-    { "<leader>fg",  "<cmd>FzfLua live_grep<CR>",       desc = "Live Grep" },
-    { "<leader>fh",  "<cmd>FzfLua help_tags<CR>",       desc = "Help Tags" },
-    { "<leader>fb",  "<cmd>FzfLua buffers<CR>",         desc = "Buffers" },
-    { "<leader>fc",  "<cmd>FzfLua commands<CR>",        desc = "Commands" },
-    { "<leader>fC",  "<cmd>FzfLua command_history<CR>", desc = "Commands history" },
-    { "<leader>fr",  "<cmd>FzfLua oldfiles<CR>",        desc = "Recent Files" },
-    { "<leader>fm",  "<cmd>FzfLua marks<CR>",           desc = "Marks" }
+    { "<leader>ff", "<cmd>FzfLua files<CR>",           desc = "Find Files" },
+    { "<leader>fg", "<cmd>FzfLua live_grep<CR>",       desc = "Live Grep" },
+    { "<leader>fh", "<cmd>FzfLua help_tags<CR>",       desc = "Help Tags" },
+    { "<leader>fb", "<cmd>FzfLua buffers<CR>",         desc = "Buffers" },
+    { "<leader>fc", "<cmd>FzfLua commands<CR>",        desc = "Commands" },
+    { "<leader>fC", "<cmd>FzfLua command_history<CR>", desc = "Commands history" },
+    { "<leader>fr", "<cmd>FzfLua oldfiles<CR>",        desc = "Recent Files" },
+    { "<leader>fm", "<cmd>FzfLua marks<CR>",           desc = "Marks" }
   },
 
   config = function()
@@ -20,15 +20,15 @@ return {
 
     require("fzf-lua").setup({
       winopts = {
-        height = 0.8, 
-        width = 0.8, 
-        row = 0.5,  
-        col = 0.5,  
+        height = 0.8,
+        width = 0.8,
+        row = 0.5,
+        col = 0.5,
         border = "rounded",
         preview = {
-          default   = "builtin",
-          border    = "rounded",
-          winopts   = {
+          default = "builtin",
+          border  = "rounded",
+          winopts = {
             signcolumn = "yes",
           }
         },
@@ -54,7 +54,6 @@ return {
             local cleaned = {}
 
             for _, line in ipairs(selected) do
-
               local path = line:match("[%w%./~%-_]+.*")
               table.insert(cleaned, path)
             end

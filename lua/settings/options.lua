@@ -6,7 +6,7 @@ local opt = vim.opt
 -- UI clarity
 opt.number = true
 opt.relativenumber = true
-opt.signcolumn = "yes"
+opt.signcolumn = "yes:2"
 opt.termguicolors = true
 opt.fillchars = { eob = " " }
 opt.colorcolumn = "100"

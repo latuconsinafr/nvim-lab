@@ -79,20 +79,21 @@ return {
             'filename',
             path = 0,
             fmt = function(str)
-              -- Strip any existing indicators to prevent duplication
               str = str:gsub(" %[%+%]", ""):gsub(" %[%-%]", "")
 
               local result = str
 
               if is_special_buffer() then
+                result = result .. " [-]"
+
                 return result
               end
 
-              -- Normal buffers: apply width-based truncation
               local win_width = vim.api.nvim_win_get_width(0)
 
               -- Get the filename based on width
-              if win_width < 80 then -- only show file name
+              -- Only show file name
+              if win_width < 80 then
                 local filename = vim.fn.fnamemodify(str, ':t')
                 local max_len = math.max(10, math.floor(win_width * 0.5))
 
@@ -101,7 +102,7 @@ return {
                 else
                   result = filename
                 end
-              -- Show parent/file
+                -- Show parent/file
               elseif win_width < 120 then
                 local full_path = vim.fn.expand("%:~:.")
                 local parts = vim.split(full_path, '/', { plain = true })
@@ -111,7 +112,7 @@ return {
                 else
                   result = str
                 end
-              -- Show full relative path
+                -- Show full relative path
               else
                 local max_len = math.floor(win_width * 0.4)
                 local full_path = vim.fn.expand("%:~:.")
@@ -136,7 +137,7 @@ return {
               end
 
               if not vim.bo.modifiable then
-                result = " [-]" .. result
+                result = result .. " [-]"
               end
 
               if vim.bo.modified then
@@ -149,7 +150,7 @@ return {
         },
         lualine_x = {
           {
-            "%S",  
+            "%S",
           },
           {
             function()

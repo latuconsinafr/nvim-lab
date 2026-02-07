@@ -4,10 +4,25 @@ local keymap = vim.keymap.set
 -- 1. Safer defaults
 --------------------------------------------------
 keymap("n", "Q", "<nop>", { noremap = true, silent = true, desc = "Disable accidental Ex mode" })
+
+-- Delete/Change without yanking (lowercase and uppercase for consistency)
 keymap({ "n", "x" }, "d", '"_d', { noremap = true, silent = true, desc = "Delete without yanking" })
+keymap({ "n", "x" }, "D", '"_D', { noremap = true, silent = true, desc = "Delete to EOL without yanking" })
 keymap({ "n", "x" }, "c", '"_c', { noremap = true, silent = true, desc = "Change without yanking" })
-keymap("x", "p", '"_dp', { noremap = true, silent = true, desc = "Paste after without overwriting default register" })
-keymap("x", "P", '"_dP', { noremap = true, silent = true, desc = "Paste before without overwriting default register" })
+keymap({ "n", "x" }, "C", '"_C', { noremap = true, silent = true, desc = "Change to EOL without yanking" })
+
+-- Make Y behave like D and C (yank to end of line, not whole line)
+keymap("n", "Y", "y$", { noremap = true, silent = true, desc = "Yank to end of line (consistent with D and C)" })
+
+-- Paste preserve register 
+keymap("x", "p", '"_dp', { noremap = true, silent = true, desc = "Paste (preserve register)" })
+keymap("x", "P", '"_dP', { noremap = true, silent = true, desc = "Paste before (preserve register)" })
+
+-- Cut (delete + yank) 
+keymap({ "n", "x" }, "<leader>x", "d", { noremap = true, desc = "Cut (delete + yank)" })
+keymap("n", "<leader>X", "D", { noremap = true, desc = "Cut to end of line" })
+keymap("n", "<leader>xx", "dd", { noremap = true, desc = "Cut whole line" })
+
 -- keymap("n", "<leader>e", vim.cmd.Ex, { noremap = true, silent = true, desc = "Open file explorer (netrw)" })
 
 --------------------------------------------------
