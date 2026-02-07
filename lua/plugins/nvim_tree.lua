@@ -1,7 +1,7 @@
 return {
-  "nvim-tree/nvim-tree.lua", 
-  version = "*",            
-  lazy = false,            
+  "nvim-tree/nvim-tree.lua",
+  version = "*",
+  lazy = false,
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   config = function()
     local api            = require("nvim-tree.api")
@@ -56,17 +56,18 @@ return {
         icons = { show = { hidden = true } },
       },
       filters = {
-        custom = {        
-          "^.git$",       
-          "^.svn$",     
-          "^.hg$",       
-          "^CVS$",     
-          "^.DS_Store$",  
-          "^Thumbs.db$", 
+        dotfiles = false,
+        custom = {
+          "^.git$",
+          "^.svn$",
+          "^.hg$",
+          "^CVS$",
+          "^.DS_Store$",
+          "^Thumbs.db$",
         },
       },
       git = {
-        timeout = 500,  
+        timeout = 500,
       },
     }
 
@@ -91,10 +92,9 @@ return {
     end, { desc = "Find file in explorer" })
 
     vim.keymap.set("n", "<leader>e]", grow_tree, { desc = "Grow explorer by 10 cols" })
-    vim.keymap.set("n", "<leader>e[", shrink_tree, { desc = "Shrink explorer by 10 cols (min " .. original_width.. ")" })
+    vim.keymap.set("n", "<leader>e[", shrink_tree, { desc = "Shrink explorer by 10 cols (min " .. original_width .. ")" })
 
     vim.api.nvim_set_hl(0, "NvimTreeIndentMarker", { fg = "#6e6a86" })
     vim.api.nvim_set_hl(0, "NvimTreeCursorLine", { bg = "#26233a" })
   end,
 }
-

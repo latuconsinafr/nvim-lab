@@ -14,6 +14,9 @@ opt.synmaxcol = 200 -- color column is 100, it make sense to syntax doubled from
 opt.showmatch = true
 opt.matchtime = 2
 
+-- Completion behaviour
+opt.completeopt = { "menu", "menuone", "noselect", "fuzzy" }
+
 -- Editing behaviour
 opt.expandtab = true
 opt.shiftwidth = 2
@@ -69,7 +72,9 @@ opt.wildignore:append({
   "nore_modules/*", ".git/*",
 })
 
-opt.cmdheight = 1
+opt.cmdheight = 0
+opt.showcmd = true
+opt.showcmdloc = "statusline"  -- Enable showcmd in statusline (use %S in lualine)
 
 --------------------------------------------------
 -- 4. Window & buffer semantics

@@ -66,38 +66,12 @@ keymap("n", "<C-\\>", "<C-w>p", { noremap = true, silent = true, desc = "Move to
 --------------------------------------------------
 -- 8. Buffer navigation
 --------------------------------------------------
+local buffers = require("settings.utils.buffers")
+
 keymap("n", "<S-l>", ":bnext<CR>", { noremap = true, silent = true, desc = "Go to next buffer" })
 keymap("n", "<S-h>", ":bprevious<CR>", { noremap = true, silent = true, desc = "Go to previous buffer" })
-keymap("n", "<leader>bc", ":bdelete<CR>", { noremap = true, silent = true, desc = "Close current buffer" })
-keymap("n", "<leader>bo", function()
-  local exclude_filetypes = {
-    "NvimTree",
-    "help",
-    "qf",
-    "lazy",
-    "mason",
-  }
-  local exclude_buftypes = {
-    "terminal",
-    "quickfix",
-    "help",
-    "nofile",
-    "prompt",
-  }
-  local curr = vim.api.nvim_get_current_buf()
-
-  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-    if buf ~= curr and vim.api.nvim_buf_is_loaded(buf) then
-      local buftype = vim.api.nvim_buf_get_option(buf, "buftype")
-      local filetype = vim.api.nvim_buf_get_option(buf, "filetype")
-
-      if not contains(exclude_buftypes, buftype) and not contains(exclude_filetypes, filetype) then
-        vim.api.nvim_buf_delete(buf, { force = false })
-
-      end
-    end
-  end
-end, { noremap = true, silent = true, desc = "Close other buffers (ignore special buffers)" })
+keymap("n", "<leader>bc", buffers.close_current_buffer, { noremap = true, silent = true, desc = "Close current buffer (smart)" })
+keymap("n", "<leader>bo", buffers.close_other_buffers, { noremap = true, silent = true, desc = "Close other buffers (keep sidebars)" })
 
 --------------------------------------------------
 -- 9. Join lines without moving cursor
@@ -157,14 +131,14 @@ keymap("n", "<C-p>", "<cmd>cprev<CR>zz", { noremap = true, silent = true, desc =
 -- 14. Find/Replace/Delete
 --------------------------------------------------
 keymap("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-  { noremap = true, silent = true, desc = "Replace current word globally (no confirm)" })
+  { noremap = true, desc = "Replace current word globally (no confirm)" })
 keymap("n", "<leader>rwc", [[:.,$s/\<<C-r><C-w>\>/<C-r><C-w>/gc<Left><Left><Left>]],
-  { noremap = true, silent = true, desc = "Replace current word from cursor to EOF (confirm)" })
+  { noremap = true, desc = "Replace current word from cursor to EOF (confirm)" })
 keymap("n", "<leader>rg", [[:%s//gI<Left><Left><Left>]],
-  { noremap = true, silent = true, desc = "Replace arbitrary word globally" })
+  { noremap = true, desc = "Replace arbitrary word globally" })
 keymap("n", "<leader>rgc", [[:.,$s//gc<Left><Left><Left>]],
-  { noremap = true, silent = true, desc = "Replace arbitrary word from cursor to EOF (confirm)" })
+  { noremap = true, desc = "Replace arbitrary word from cursor to EOF (confirm)" })
 keymap("n", "<leader>dw", [[:g/\<<C-r><C-w>\>/d<CR>]],
   { noremap = true, silent = true, desc = "Delete all lines containing current word" })
 keymap("n", "<leader>df", [[:g//d<Left><Left>]],
-  { noremap = true, silent = true, desc = "Delete all lines matching last search" })
+  { noremap = true, desc = "Delete all lines matching last search" })
