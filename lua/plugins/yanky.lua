@@ -22,10 +22,10 @@ return {
       },
     })
 
-    vim.keymap.set("n", "p", "<Plug>(YankyPutBefore)", { desc = "Put after" })
-    vim.keymap.set("n", "P", "<Plug>(YankyPutAfter)", { desc = "Put before" })
-    vim.keymap.set("x", "p", "<Plug>(YankyPutBefore)", { desc = "Paste (can cycle with <C-p>)" })
-    vim.keymap.set("x", "P", "<Plug>(YankyPutAfter)", { desc = "Paste before (can cycle with <C-p>)" })
+    vim.keymap.set("n", "p", "<Plug>(YankyPutAfter)", { desc = "Put after" })
+    vim.keymap.set("n", "P", "<Plug>(YankyPutBefore)", { desc = "Put before" })
+    vim.keymap.set("x", "p", "<Plug>(YankyPutAfter)", { desc = "Paste (can cycle with <C-p>)" })
+    vim.keymap.set("x", "P", "<Plug>(YankyPutBefore)", { desc = "Paste before (can cycle with <C-p>)" })
     vim.keymap.set("n", "<C-p>", "<Plug>(YankyPreviousEntry)", { desc = "Previous yank in history" })
     vim.keymap.set("n", "<C-n>", "<Plug>(YankyNextEntry)", { desc = "Next yank in history" })
     vim.keymap.set("n", "<leader>fy", function()

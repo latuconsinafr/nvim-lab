@@ -12,6 +12,7 @@ end
 vim.lsp.enable({
   "lua_ls",
   "ts_ls",
+  "eslint",
   "pyright",
   "rust_analyzer",
 })

@@ -74,7 +74,7 @@ opt.wildignore:append({
 
 opt.cmdheight = 0
 opt.showcmd = true
-opt.showcmdloc = "statusline"  -- Enable showcmd in statusline (use %S in lualine)
+opt.showcmdloc = "statusline" -- Enable showcmd in statusline (use %S in lualine)
 
 --------------------------------------------------
 -- 4. Window & buffer semantics
@@ -89,12 +89,15 @@ opt.winminheight = 5
 opt.switchbuf = { "useopen" } -- reuse existing windows
 
 --------------------------------------------------
--- 5. Folding
+-- 5. Folding (Treesitter-based)
 --------------------------------------------------
 opt.foldenable = true
-opt.foldmethod = "manual"
+-- opt.foldmethod = "manual" -- disabled, use treesitter expr
+opt.foldmethod = "expr"
 opt.foldlevelstart = 99 -- no folds closed
-opt.foldcolumn = "1"
+opt.foldcolumn = "0"
+opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+opt.foldtext = "" -- use default fold text (cleaner)
 
 --------------------------------------------------
 -- 6. Movement precision & cursor semantics
