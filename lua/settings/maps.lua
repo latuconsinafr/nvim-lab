@@ -157,3 +157,13 @@ keymap("n", "<leader>dw", [[:g/\<<C-r><C-w>\>/d<CR>]],
   { noremap = true, silent = true, desc = "Delete all lines containing current word" })
 keymap("n", "<leader>df", [[:g//d<Left><Left>]],
   { noremap = true, desc = "Delete all lines matching last search" })
+
+--------------------------------------------------
+-- 15. Floating terminal
+--------------------------------------------------
+local terminal = require("settings.utils.terminal")
+
+keymap("n", "\\", terminal.toggle, { noremap = true, silent = true, desc = "Toggle floating terminal from normal mode" })
+keymap("t", "<C-[><C-[>", "<C-\\><C-n>", { noremap = true, silent = true, desc = "Exit terminal mode to normal mode" })
+keymap("t", "<C-\\>", "<C-\\><C-n>:lua require('settings.utils.terminal').toggle()<CR>",
+  { noremap = true, silent = true, desc = "Close floating terminal from terminal mode" })
