@@ -118,3 +118,53 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
   end,
 })
+
+--------------------------------------------------
+-- Helper: Check LSP status for current buffer
+--------------------------------------------------
+vim.api.nvim_create_user_command("LspStatus", function()
+  local clients = vim.lsp.get_clients({ bufnr = 0 })
+
+  if #clients == 0 then
+    vim.notify("No LSP clients attached to this buffer", vim.log.levels.WARN)
+    return
+  end
+
+  local lines = { "LSP Clients attached to this buffer:\n" }
+
+  for _, client in ipairs(clients) do
+    table.insert(lines, string.format("• %s (id: %d)", client.name, client.id))
+
+    if client.config.root_dir then
+      table.insert(lines, string.format("  root: %s", client.config.root_dir))
+    end
+  end
+
+  vim.notify(table.concat(lines, "\n"), vim.log.levels.INFO)
+end, { desc = "Show LSP client status for current buffer" })
+
+--------------------------------------------------
+-- 5. SQL Formatting (standalone, no LSP required)
+--------------------------------------------------
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "sql", "mysql", "plsql" },
+  callback = function(args)
+    vim.keymap.set("n", "<leader>f", function()
+      if vim.fn.executable("sql-formatter") == 0 then
+        vim.notify("sql-formatter not found. Install: npm install -g sql-formatter", vim.log.levels.WARN)
+        return
+      end
+
+      local lines = vim.api.nvim_buf_get_lines(args.buf, 0, -1, false)
+      local content = table.concat(lines, "\n")
+      local formatted = vim.fn.system("sql-formatter", content)
+
+      if vim.v.shell_error == 0 then
+        vim.api.nvim_buf_set_lines(args.buf, 0, -1, false, vim.split(formatted, "\n"))
+        vim.notify("SQL formatted", vim.log.levels.INFO)
+      else
+        vim.notify("Failed to format SQL: " .. formatted, vim.log.levels.ERROR)
+      end
+    end, { buffer = args.buf, desc = "Format SQL" })
+  end,
+})

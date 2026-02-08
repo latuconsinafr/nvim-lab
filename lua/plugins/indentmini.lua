@@ -4,6 +4,7 @@ return {
   config = function()
     require("indentmini").setup({
       char = "│",
+      exclude = { 'dbout' },
     })
 
     vim.api.nvim_set_hl(0, "IndentLine", { fg = "#6e6a86" })

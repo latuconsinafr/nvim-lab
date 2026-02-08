@@ -14,11 +14,11 @@ keymap({ "n", "x" }, "C", '"_C', { noremap = true, silent = true, desc = "Change
 -- Make Y behave like D and C (yank to end of line, not whole line)
 keymap("n", "Y", "y$", { noremap = true, silent = true, desc = "Yank to end of line (consistent with D and C)" })
 
--- Paste preserve register 
+-- Paste preserve register
 keymap("x", "p", '"_dp', { noremap = true, silent = true, desc = "Paste (preserve register)" })
 keymap("x", "P", '"_dP', { noremap = true, silent = true, desc = "Paste before (preserve register)" })
 
--- Cut (delete + yank) 
+-- Cut (delete + yank)
 keymap({ "n", "x" }, "<leader>x", "d", { noremap = true, desc = "Cut (delete + yank)" })
 keymap("n", "<leader>X", "D", { noremap = true, desc = "Cut to end of line" })
 keymap("n", "<leader>xx", "dd", { noremap = true, desc = "Cut whole line" })
@@ -85,13 +85,35 @@ local buffers = require("settings.utils.buffers")
 
 keymap("n", "<S-l>", ":bnext<CR>", { noremap = true, silent = true, desc = "Go to next buffer" })
 keymap("n", "<S-h>", ":bprevious<CR>", { noremap = true, silent = true, desc = "Go to previous buffer" })
-keymap("n", "<leader>bc", buffers.close_current_buffer, { noremap = true, silent = true, desc = "Close current buffer (smart)" })
-keymap("n", "<leader>bo", buffers.close_other_buffers, { noremap = true, silent = true, desc = "Close other buffers (keep sidebars)" })
+keymap("n", "<leader>bc", buffers.close_current_buffer,
+  { noremap = true, silent = true, desc = "Close current buffer (smart)" })
+keymap("n", "<leader>bo", buffers.close_other_buffers,
+  { noremap = true, silent = true, desc = "Close other buffers (keep sidebars)" })
+keymap("n", "<leader>bn", function()
+  vim.ui.input({ prompt = "Filetype (optional): " }, function(ft)
+    vim.cmd("enew")
+    if ft and ft ~= "" then
+      vim.bo.filetype = ft
+    end
+  end)
+end, { desc = "New buffer with filetype" })
+keymap("n", "<leader>bf", function()
+  vim.ui.input({
+    prompt = "Set filetype: ",
+    default = vim.bo.filetype
+  }, function(ft)
+    if ft and ft ~= "" then
+      vim.bo.filetype = ft
+      print("Filetype set to: " .. ft)
+    end
+  end)
+end, { desc = "Set buffer filetype" })
 
 --------------------------------------------------
 -- 9. Join lines without moving cursor
 --------------------------------------------------
-keymap("n", "J", function() local pos = vim.fn.winsaveview()
+keymap("n", "J", function()
+  local pos = vim.fn.winsaveview()
 
   vim.cmd("normal! J")
   vim.fn.winrestview(pos)
@@ -122,9 +144,9 @@ keymap('n', '<leader>rr', function()
   if choice == 1 then
     vim.cmd('e!')
 
-    print("File reloaded from disk ✅")
+    print("File reloaded from disk")
   else
-    print("Reload canceled ❌")
+    print("Reload canceled")
   end
 end, { noremap = true, silent = true, desc = "Force reload current file with confirmation" })
 

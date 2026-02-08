@@ -1,3 +1,4 @@
+-- Utility function for buffers
 local M = {}
 
 --------------------------------------------------
