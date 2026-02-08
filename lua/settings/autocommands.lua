@@ -77,3 +77,13 @@ create_autocmd("FileType", {
   end,
 })
 
+-- Format options (prevent auto-comment on newline)
+-- Must be in autocmd because ftplugins override it
+create_autocmd("FileType", {
+  desc = "Set formatoptions to prevent auto-commenting",
+  callback = function()
+    vim.opt_local.formatoptions:remove({ "c", "r", "o" })  -- No auto-comment
+    vim.opt_local.formatoptions:append({ "n", "j" })       -- Smart lists, join comments
+  end,
+})
+

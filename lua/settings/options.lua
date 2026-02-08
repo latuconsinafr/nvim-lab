@@ -44,6 +44,10 @@ opt.incsearch = true
 opt.hlsearch = true
 opt.wrapscan = false -- do not wrap searches silently
 
+-- Faster grep with ripgrep
+opt.grepprg = "rg --vimgrep --no-heading --smart-case"
+opt.grepformat = "%f:%l:%c:%m"
+
 --------------------------------------------------
 -- 2. Editor state & safety (undo / swap / backup)
 --------------------------------------------------
@@ -66,10 +70,24 @@ opt.wildmenu = true
 opt.wildmode = { "longest", "full" }
 
 opt.wildignore:append({
-  "*.o", "*.obj", "*.bin", "*.exe",
-  "*.jpg", "*.png", "*.gif",
-  "*.zip", "*.tar", "*.gz",
-  "nore_modules/*", ".git/*",
+  "*.o",
+  "*.obj",
+  "*.bin",
+  "*.exe",
+  "*.jpg",
+  "*.png",
+  "*.gif",
+  "*.zip",
+  "*.tar",
+  "*.gz",
+  ".git/*",
+  "*/node_modules/*",
+  "*/dist/*",
+  "*/build/*",
+  "*/__pycache__/*",
+  "*.pyc",
+  "*/target/*",
+  "*/.next/*",
 })
 
 opt.cmdheight = 0
@@ -125,3 +143,9 @@ opt.report = 999
 opt.errorbells = false
 opt.visualbell = false
 opt.belloff = "all"
+
+--------------------------------------------------
+-- 9. Purist settings
+--------------------------------------------------
+-- Better diff algorithm
+opt.diffopt:append({ "algorithm:histogram", "indent-heuristic" })

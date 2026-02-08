@@ -91,7 +91,11 @@ keymap("n", "<leader>bo", buffers.close_other_buffers, { noremap = true, silent 
 --------------------------------------------------
 -- 9. Join lines without moving cursor
 --------------------------------------------------
-keymap("n", "J", "mzJ`z", { noremap = true, silent = true, desc = "Join lines without moving cursor" })
+keymap("n", "J", function() local pos = vim.fn.winsaveview()
+
+  vim.cmd("normal! J")
+  vim.fn.winrestview(pos)
+end, { noremap = true, silent = true, desc = "Join lines without moving cursor" })
 
 --------------------------------------------------
 -- 10. Easy line duplication
