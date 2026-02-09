@@ -9,13 +9,36 @@ end
 --------------------------------------------------
 -- 2. Enable language servers (configs in lsp/ dir)
 --------------------------------------------------
-vim.lsp.enable({
+-- List of LSP servers to enable (add/remove as needed)
+local servers = {
   "lua_ls",
   "ts_ls",
   "eslint",
   "pyright",
   "rust_analyzer",
-})
+}
+
+-- Load blink.cmp capabilities if available
+local has_blink, blink = pcall(require, "blink.cmp")
+local capabilities = has_blink and blink.get_lsp_capabilities() or nil
+
+-- Inject blink capabilities into each server config
+if capabilities then
+  local config_path = vim.fn.stdpath("config") .. "/lsp"
+
+  for _, server in ipairs(servers) do
+    local config_file = config_path .. "/" .. server .. ".lua"
+
+    if vim.fn.filereadable(config_file) == 1 then
+      local config = dofile(config_file)
+
+      config.capabilities = capabilities
+      vim.lsp.config[server] = config
+    end
+  end
+end
+
+vim.lsp.enable(servers)
 
 --------------------------------------------------
 -- 3. Diagnostics
@@ -111,11 +134,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end, "Format buffer")
 
     --------------------------------------------------
-    -- Built-in completion (auto-trigger as you type)
+    -- Built-in completion (disabled when using blink.cmp)
     --------------------------------------------------
-    if client:supports_method("textDocument/completion") then
-      vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
-    end
+    -- Native completion is disabled in favor of blink.cmp
+    -- If you remove blink.cmp, uncomment below:
+    -- if client:supports_method("textDocument/completion") then
+    --   vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
+    -- end
   end,
 })
 

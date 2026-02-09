@@ -34,7 +34,7 @@ return {
       enable = false,
       mode = "all",
     },
-    format = false,
+    format = true,
     quiet = false,
     onIgnoredFiles = "off",
     rulesCustomizations = {},
