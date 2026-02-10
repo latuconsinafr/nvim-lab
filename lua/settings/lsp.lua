@@ -90,11 +90,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     --   <C-W><C-D>  - Same as above
 
     --------------------------------------------------
-    -- Override default for semantics
-    --------------------------------------------------
-    map("n", "gl", vim.diagnostic.open_float, "Show diagnostic float")
-
-    --------------------------------------------------
     -- Navigation (single/certain results - keep as default)
     --------------------------------------------------
     map("n", "gd", vim.lsp.buf.definition, "Go to definition")
@@ -104,7 +99,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- Split window alternatives
     --------------------------------------------------
     map("n", "<C-W>gd", function()
-      vim.cmd.vsplit()
+      vim.cmd.split()
       vim.lsp.buf.definition()
     end, "Go to definition in vsplit")
 
