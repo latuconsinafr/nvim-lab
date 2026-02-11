@@ -39,7 +39,7 @@ create_autocmd("BufReadPre", {
 --   pattern = "netrw",
 --   callback = function()
 --     -- Use pcall to safely try to delete the mapping
---     pcall(vim.keymap.del, "n", "<C-l>", { buffer = true })  
+--     pcall(vim.keymap.del, "n", "<C-l>", { buffer = true })
 --   end,
 -- })
 
@@ -54,16 +54,12 @@ create_autocmd("FileType", {
   end,
 })
 
--- Help buffer ergonomics (Neovim 0.10+ uses filetype=markdown for help)
-create_autocmd("BufEnter", {
-  desc = "Make help buffers easy to close",
+-- Temporary utility windows ergonomics
+create_autocmd("FileType", {
+  desc = "Make temporary utility windows easy to close",
+  pattern = { "help", "qf" },
   callback = function()
-    if vim.bo.buftype == "help" then
-      vim.keymap.set("n", "q", "<cmd>q<cr>", { buffer = true, silent = true })
-      -- Also disable line numbers for help
-      vim.opt_local.number = false
-      vim.opt_local.relativenumber = false
-    end
+    vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = true, silent = true })
   end,
 })
 
@@ -82,8 +78,7 @@ create_autocmd("FileType", {
 create_autocmd("FileType", {
   desc = "Set formatoptions to prevent auto-commenting",
   callback = function()
-    vim.opt_local.formatoptions:remove({ "c", "r", "o" })  -- No auto-comment
-    vim.opt_local.formatoptions:append({ "n", "j" })       -- Smart lists, join comments
+    vim.opt_local.formatoptions:remove({ "c", "r", "o" }) -- No auto-comment
+    vim.opt_local.formatoptions:append({ "n", "j" })      -- Smart lists, join comments
   end,
 })
-

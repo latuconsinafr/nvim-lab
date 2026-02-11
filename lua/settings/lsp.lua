@@ -18,23 +18,23 @@ local servers = {
   "rust_analyzer",
 }
 
--- Load blink.cmp capabilities if available
-local has_blink, blink = pcall(require, "blink.cmp")
-local capabilities = has_blink and blink.get_lsp_capabilities() or nil
+-- Load server configs from lsp/ directory
+local config_path = vim.fn.stdpath("config") .. "/lsp"
 
--- Inject blink capabilities into each server config
-if capabilities then
-  local config_path = vim.fn.stdpath("config") .. "/lsp"
+for _, server in ipairs(servers) do
+  local config_file = config_path .. "/" .. server .. ".lua"
 
-  for _, server in ipairs(servers) do
-    local config_file = config_path .. "/" .. server .. ".lua"
+  if vim.fn.filereadable(config_file) == 1 then
+    local config = dofile(config_file)
 
-    if vim.fn.filereadable(config_file) == 1 then
-      local config = dofile(config_file)
+    -- Add blink.cmp capabilities if available
+    local has_blink, blink = pcall(require, "blink.cmp")
 
-      config.capabilities = capabilities
-      vim.lsp.config[server] = config
+    if has_blink then
+      config.capabilities = blink.get_lsp_capabilities()
     end
+
+    vim.lsp.config[server] = config
   end
 end
 
