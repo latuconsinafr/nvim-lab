@@ -32,5 +32,5 @@ lazy.setup({
     { import = "plugins" },              -- main plugins folder
     { import = "plugins.colorschemes" }, -- all color scheme related plugins folder
   },
-  checker = { enabled = true }, -- automatically check for plugin updates
+  checker = { enabled = true },          -- automatically check for plugin updates
 })

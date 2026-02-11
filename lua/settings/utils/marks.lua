@@ -6,13 +6,13 @@ local M = {}
 M.get_group_marks = function(group_nr)
   local ok, marks_module = pcall(require, 'marks')
   if not ok or not marks_module.bookmark_state then
-    vim.api.nvim_echo({{"marks.nvim not loaded or bookmark_state unavailable", "WarningMsg"}}, false, {})
+    vim.api.nvim_echo({ { "marks.nvim not loaded or bookmark_state unavailable", "WarningMsg" } }, false, {})
     return {}
   end
 
   local group = marks_module.bookmark_state.groups[group_nr]
   if not group or not group.marks then
-    vim.api.nvim_echo({{"No marks in group " .. group_nr, "Normal"}}, false, {})
+    vim.api.nvim_echo({ { "No marks in group " .. group_nr, "Normal" } }, false, {})
     return {}
   end
 
@@ -28,7 +28,7 @@ M.get_group_marks = function(group_nr)
       if vim.api.nvim_buf_is_loaded(bufnr) then
         local lines = vim.api.nvim_buf_get_lines(bufnr, line - 1, line, false)
         text = lines[1] or ""
-        text = text:gsub("^%s+", "")  -- trim leading whitespace
+        text = text:gsub("^%s+", "") -- trim leading whitespace
       end
 
       -- Format: filename:line:col text
@@ -46,7 +46,7 @@ M.get_group_marks = function(group_nr)
   table.sort(items)
 
   if #items == 0 then
-    vim.api.nvim_echo({{"No marks in group " .. group_nr, "Normal"}}, false, {})
+    vim.api.nvim_echo({ { "No marks in group " .. group_nr, "Normal" } }, false, {})
   end
 
   return items
