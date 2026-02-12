@@ -22,7 +22,7 @@ return {
       },
     })
 
-    vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutBefore)", { desc = "Put after" })
+    vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)", { desc = "Put after" })
     vim.keymap.set({ "n", "x" }, "P", "<Plug>(YankyPutBefore)", { desc = "Put before" })
     vim.keymap.set("n", "<C-p>", "<Plug>(YankyPreviousEntry)", { desc = "Previous yank in history" })
     vim.keymap.set("n", "<C-n>", "<Plug>(YankyNextEntry)", { desc = "Next yank in history" })

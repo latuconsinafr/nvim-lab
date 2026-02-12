@@ -92,6 +92,7 @@ keymap("n", "<leader>bo", buffers.close_other_buffers,
 keymap("n", "<leader>bn", function()
   vim.ui.input({ prompt = "Filetype (optional): " }, function(ft)
     vim.cmd("enew")
+
     if ft and ft ~= "" then
       vim.bo.filetype = ft
     end
@@ -104,7 +105,6 @@ keymap("n", "<leader>bf", function()
   }, function(ft)
     if ft and ft ~= "" then
       vim.bo.filetype = ft
-      print("Filetype set to: " .. ft)
     end
   end)
 end, { desc = "Set buffer filetype" })
@@ -143,10 +143,6 @@ keymap('n', '<leader>rr', function()
 
   if choice == 1 then
     vim.cmd('e!')
-
-    print("File reloaded from disk")
-  else
-    print("Reload canceled")
   end
 end, { noremap = true, silent = true, desc = "Force reload current file with confirmation" })
 

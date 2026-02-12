@@ -13,6 +13,7 @@ return {
       sort_by = "case_sensitive",
       view = { width = original_width },
       renderer = {
+        group_empty = true,
         indent_markers = { enable = true },
         icons = { show = { hidden = true } },
       },
@@ -31,6 +32,8 @@ return {
         timeout = 500,
       },
     }
+
+    -- Use "I" inside the nvim tree to toggle hidden git files
 
     -- Register NvimTree as a sidebar
     sidebar.register({
