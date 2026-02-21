@@ -59,9 +59,6 @@ return {
     vim.api.nvim_create_autocmd("FileType", {
       pattern = { "sql", "mysql", "plsql" },
       callback = function(args)
-        -- vim-dadbod-completion
-        vim.bo[args.buf].omnifunc = "vim_dadbod_completion#omni"
-
         -- Query execution keymaps (only for DBUI query buffers)
         if vim.b[args.buf].db then
           vim.keymap.set({ "n", "v" }, "<leader>dq", "<Plug>(DBUI_ExecuteQuery)",

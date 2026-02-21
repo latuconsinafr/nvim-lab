@@ -17,6 +17,20 @@ return {
     completion = {
       documentation = { auto_show = true, auto_show_delay_ms = 500 },
     },
-    signature = { enabled = true }
+    signature = { enabled = true },
+    sources = {
+      default = { "lsp", "path", "snippets", "buffer" },
+      providers = {
+        dadbod = {
+          name = "Dadbod",
+          module = "vim_dadbod_completion.blink",
+        },
+      },
+      per_filetype = {
+        sql = { "lsp", "dadbod", "snippets", "buffer", "path" },
+        mysql = { "lsp", "dadbod", "snippets", "buffer", "path" },
+        plsql = { "lsp", "dadbod", "snippets", "buffer", "path" },
+      },
+    },
   },
 }
