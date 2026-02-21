@@ -30,6 +30,8 @@ return {
           vim.keymap.set(mode, l, r, opts)
         end
 
+        map("n", "<leader>gl", "<cmd>Gitsigns setqflist all<CR>", { desc = "List all hunks in quickfix" })
+
         map("n", "]c", function()
           if vim.wo.diff then return "]c" end
           vim.schedule(function() gitsigns.next_hunk() end)

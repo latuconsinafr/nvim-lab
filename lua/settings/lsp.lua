@@ -14,6 +14,8 @@ local servers = {
   "lua_ls",
   "ts_ls",
   "eslint",
+  "jsonls",
+  "yamlls",
   "pyright",
   "rust_analyzer",
 }
@@ -29,7 +31,6 @@ for _, server in ipairs(servers) do
 
     -- Add blink.cmp capabilities if available
     local has_blink, blink = pcall(require, "blink.cmp")
-
     if has_blink then
       config.capabilities = blink.get_lsp_capabilities()
     end
