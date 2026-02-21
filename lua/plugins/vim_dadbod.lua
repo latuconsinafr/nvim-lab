@@ -45,7 +45,7 @@ return {
     })
 
     -- Setup sidebar resize keymaps
-    sidebar.setup_resize_keymaps("dbui", "<leader>d]", "<leader>d[", {
+    sidebar.setup_resize_keymaps("dbui", "<leader>d>", "<leader>d<", {
       min_width = original_width,
       step = step,
       grow_desc = "Grow database explorer width",

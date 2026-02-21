@@ -45,7 +45,7 @@ vim.lsp.enable(servers)
 -- 3. Diagnostics
 --------------------------------------------------
 vim.diagnostic.config({
-  virtual_text = { prefix = "●" },
+  virtual_text = { current_line = true },
   severity_sort = true,
   float = {
     border = "rounded",
@@ -79,9 +79,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 
     --------------------------------------------------
-    -- Neovim 0.11 Default LSP Keymaps (NOT overridden)
+    -- Neovim 0.11 Default LSP Keymaps
     --------------------------------------------------
-    -- These work out of the box, listed here for reference:
+    -- These work out of the box (not overridden):
     --   grn         - Rename
     --   <C-X><C-O>  - Omnifunc
     --   K           - Hover documentation
@@ -99,15 +99,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
     --------------------------------------------------
     -- Split window alternatives
     --------------------------------------------------
-    map("n", "<C-W>gd", function()
+    map("n", "<C-w>gd", function()
       vim.cmd.split()
       vim.lsp.buf.definition()
-    end, "Go to definition in vsplit")
+    end, "Go to definition in split")
 
-    map("n", "<C-W>gD", function()
-      vim.cmd.split()
+    map("n", "<C-w>gD", function()
+      vim.cmd.vsplit()
       vim.lsp.buf.declaration()
-    end, "Go to declaration in split")
+    end, "Go to declaration in vsplit")
 
     --------------------------------------------------
     -- Override defaults with FzfLua (multiple results benefit from fuzzy search)

@@ -63,7 +63,7 @@ return {
     })
 
     -- Setup resize keymaps
-    sidebar.setup_resize_keymaps("NvimTree", "<leader>e]", "<leader>e[", {
+    sidebar.setup_resize_keymaps("NvimTree", "<leader>e>", "<leader>e<", {
       min_width = original_width,
       step = step,
       grow_desc = "Grow file explorer width",

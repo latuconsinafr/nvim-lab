@@ -5,35 +5,102 @@ return {
   },
   cmd = "FzfLua",
   keys = {
-    { "<leader>ff",  "<cmd>FzfLua files<CR>",                                                                                                                                 desc = "Find Files" },
-    { "<leader>fg",  "<cmd>FzfLua live_grep<CR>",                                                                                                                             desc = "Live Grep" },
-    { "<leader>fh",  "<cmd>FzfLua help_tags<CR>",                                                                                                                             desc = "Help Tags" },
-    { "<leader>fb",  "<cmd>FzfLua buffers<CR>",                                                                                                                               desc = "Buffers" },
-    { "<leader>fc",  "<cmd>FzfLua commands<CR>",                                                                                                                              desc = "Commands" },
-    { "<leader>fC",  "<cmd>FzfLua command_history<CR>",                                                                                                                       desc = "Commands history" },
-    { "<leader>fr",  "<cmd>FzfLua oldfiles<CR>",                                                                                                                              desc = "Recent Files" },
-    { "<leader>fma",  "<cmd>FzfLua marks<CR>",                                                                                                                                 desc = "Marks (All)" },
-    { "<leader>fm0", function() require("fzf-lua").fzf_exec(require("settings.utils.marks").get_group_marks(0),
-        { actions = require("fzf-lua").defaults.actions.files }) end,                                                                                                         desc = "Marks Group 0" },
-    { "<leader>fm1", function() require("fzf-lua").fzf_exec(require("settings.utils.marks").get_group_marks(1),
-        { actions = require("fzf-lua").defaults.actions.files }) end,                                                                                                         desc = "Marks Group 1" },
-    { "<leader>fm2", function() require("fzf-lua").fzf_exec(require("settings.utils.marks").get_group_marks(2),
-        { actions = require("fzf-lua").defaults.actions.files }) end,                                                                                                         desc = "Marks Group 2" },
-    { "<leader>fm3", function() require("fzf-lua").fzf_exec(require("settings.utils.marks").get_group_marks(3),
-        { actions = require("fzf-lua").defaults.actions.files }) end,                                                                                                         desc = "Marks Group 3" },
-    { "<leader>fm4", function() require("fzf-lua").fzf_exec(require("settings.utils.marks").get_group_marks(4),
-        { actions = require("fzf-lua").defaults.actions.files }) end,                                                                                                         desc = "Marks Group 4" },
-    { "<leader>fm5", function() require("fzf-lua").fzf_exec(require("settings.utils.marks").get_group_marks(5),
-        { actions = require("fzf-lua").defaults.actions.files }) end,                                                                                                         desc = "Marks Group 5" },
-    { "<leader>fm6", function() require("fzf-lua").fzf_exec(require("settings.utils.marks").get_group_marks(6),
-        { actions = require("fzf-lua").defaults.actions.files }) end,                                                                                                         desc = "Marks Group 6" },
-    { "<leader>fm7", function() require("fzf-lua").fzf_exec(require("settings.utils.marks").get_group_marks(7),
-        { actions = require("fzf-lua").defaults.actions.files }) end,                                                                                                         desc = "Marks Group 7" },
-    { "<leader>fm8", function() require("fzf-lua").fzf_exec(require("settings.utils.marks").get_group_marks(8),
-        { actions = require("fzf-lua").defaults.actions.files }) end,                                                                                                         desc = "Marks Group 8" },
-    { "<leader>fm9", function() require("fzf-lua").fzf_exec(require("settings.utils.marks").get_group_marks(9),
-        { actions = require("fzf-lua").defaults.actions.files }) end,                                                                                                         desc = "Marks Group 9" },
-    { "<leader>f?",  "<cmd>FzfLua keymaps<CR>",                                                                                                                               desc = "Keymaps" }
+    { "<leader>ff",  "<cmd>FzfLua files<CR>",           desc = "Find Files" },
+    { "<leader>fg",  "<cmd>FzfLua live_grep<CR>",       desc = "Live Grep" },
+    { "<leader>fh",  "<cmd>FzfLua help_tags<CR>",       desc = "Help Tags" },
+    { "<leader>fb",  "<cmd>FzfLua buffers<CR>",         desc = "Buffers" },
+    { "<leader>fc",  "<cmd>FzfLua commands<CR>",        desc = "Commands" },
+    { "<leader>fC",  "<cmd>FzfLua command_history<CR>", desc = "Commands history" },
+    { "<leader>fr",  "<cmd>FzfLua oldfiles<CR>",        desc = "Recent Files" },
+    { "<leader>fma", "<cmd>FzfLua marks<CR>",           desc = "Marks (All)" },
+    { "<leader>fq",  "<cmd>FzfLua quickfix<CR>",        desc = "Quickfix List" },
+    { "<leader>fQ",  "<cmd>FzfLua quickfix_stack<CR>",  desc = "Quickfix Stack" },
+    { "<leader>fl",  "<cmd>FzfLua loclist<CR>",         desc = "Location List" },
+    { "<leader>fL",  "<cmd>FzfLua loclist_stack<CR>",   desc = "Location Stack" },
+    { "<leader>fj",  "<cmd>FzfLua jumps<CR>",           desc = "Jump List" },
+    { "<leader>fx",  "<cmd>FzfLua changes<CR>",         desc = "Change List" },
+    { "<leader>ft",  "<cmd>FzfLua tags<CR>",            desc = "Tags" },
+    { "<leader>f?",  "<cmd>FzfLua keymaps<CR>",         desc = "Keymaps" },
+    {
+      "<leader>fm0",
+      function()
+        require("fzf-lua").fzf_exec(require("settings.utils.marks").get_group_marks(0),
+          { actions = require("fzf-lua").defaults.actions.files })
+      end,
+      desc = "Marks Group 0"
+    },
+    {
+      "<leader>fm1",
+      function()
+        require("fzf-lua").fzf_exec(require("settings.utils.marks").get_group_marks(1),
+          { actions = require("fzf-lua").defaults.actions.files })
+      end,
+      desc = "Marks Group 1"
+    },
+    {
+      "<leader>fm2",
+      function()
+        require("fzf-lua").fzf_exec(require("settings.utils.marks").get_group_marks(2),
+          { actions = require("fzf-lua").defaults.actions.files })
+      end,
+      desc = "Marks Group 2"
+    },
+    {
+      "<leader>fm3",
+      function()
+        require("fzf-lua").fzf_exec(require("settings.utils.marks").get_group_marks(3),
+          { actions = require("fzf-lua").defaults.actions.files })
+      end,
+      desc = "Marks Group 3"
+    },
+    {
+      "<leader>fm4",
+      function()
+        require("fzf-lua").fzf_exec(require("settings.utils.marks").get_group_marks(4),
+          { actions = require("fzf-lua").defaults.actions.files })
+      end,
+      desc = "Marks Group 4"
+    },
+    {
+      "<leader>fm5",
+      function()
+        require("fzf-lua").fzf_exec(require("settings.utils.marks").get_group_marks(5),
+          { actions = require("fzf-lua").defaults.actions.files })
+      end,
+      desc = "Marks Group 5"
+    },
+    {
+      "<leader>fm6",
+      function()
+        require("fzf-lua").fzf_exec(require("settings.utils.marks").get_group_marks(6),
+          { actions = require("fzf-lua").defaults.actions.files })
+      end,
+      desc = "Marks Group 6"
+    },
+    {
+      "<leader>fm7",
+      function()
+        require("fzf-lua").fzf_exec(require("settings.utils.marks").get_group_marks(7),
+          { actions = require("fzf-lua").defaults.actions.files })
+      end,
+      desc = "Marks Group 7"
+    },
+    {
+      "<leader>fm8",
+      function()
+        require("fzf-lua").fzf_exec(require("settings.utils.marks").get_group_marks(8),
+          { actions = require("fzf-lua").defaults.actions.files })
+      end,
+      desc = "Marks Group 8"
+    },
+    {
+      "<leader>fm9",
+      function()
+        require("fzf-lua").fzf_exec(require("settings.utils.marks").get_group_marks(9),
+          { actions = require("fzf-lua").defaults.actions.files })
+      end,
+      desc = "Marks Group 9"
+    },
   },
 
   config = function()

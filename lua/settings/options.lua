@@ -90,6 +90,7 @@ opt.wildignore:append({
   "*/.next/*",
 })
 
+opt.winborder = "rounded"
 opt.cmdheight = 0
 opt.showcmd = true
 opt.showcmdloc = "statusline" -- Enable showcmd in statusline (use %S in lualine)

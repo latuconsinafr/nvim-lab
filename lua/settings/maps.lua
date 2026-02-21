@@ -83,8 +83,9 @@ keymap("n", "<C-\\>", "<C-w>p", { noremap = true, silent = true, desc = "Move to
 --------------------------------------------------
 local buffers = require("settings.utils.buffers")
 
-keymap("n", "<S-l>", ":bnext<CR>", { noremap = true, silent = true, desc = "Go to next buffer" })
-keymap("n", "<S-h>", ":bprevious<CR>", { noremap = true, silent = true, desc = "Go to previous buffer" })
+-- Commented out, use the default in nvim > 0.11 (]b and [b)
+-- keymap("n", "<S-l>", ":bnext<CR>", { noremap = true, silent = true, desc = "Go to next buffer" })
+-- keymap("n", "<S-h>", ":bprevious<CR>", { noremap = true, silent = true, desc = "Go to previous buffer" })
 keymap("n", "<leader>bc", buffers.close_current_buffer,
   { noremap = true, silent = true, desc = "Close current buffer (smart)" })
 keymap("n", "<leader>bo", buffers.close_other_buffers,
@@ -108,6 +109,10 @@ keymap("n", "<leader>bf", function()
     end
   end)
 end, { desc = "Set buffer filetype" })
+keymap("n", "<leader>bw", "<cmd>w<CR>",
+  { noremap = true, silent = true, desc = "Write whole buffer to the current file" })
+keymap("n", "<leader>bW", "<cmd>w<CR>",
+  { noremap = true, silent = true, desc = "Write all changed buffers" })
 
 --------------------------------------------------
 -- 9. Join lines without moving cursor
@@ -149,20 +154,18 @@ end, { noremap = true, silent = true, desc = "Force reload current file with con
 --------------------------------------------------
 -- 13. Quickfix
 --------------------------------------------------
-keymap("n", "<leader>qf", function()
+keymap("n", "<leader>q", function()
   for _, win in ipairs(vim.api.nvim_list_wins()) do
     local buf = vim.api.nvim_win_get_buf(win)
+
     if vim.bo[buf].filetype == "qf" then
       vim.cmd("cclose")
+
       return
     end
   end
   vim.cmd("copen")
 end, { noremap = true, silent = true, desc = "Toggle quickfix window" })
-
--- Navigate quickfix list
-keymap("n", "<C-n>", "<cmd>cnext<CR>zz", { noremap = true, silent = true, desc = "Next quickfix item and center" })
-keymap("n", "<C-p>", "<cmd>cprev<CR>zz", { noremap = true, silent = true, desc = "Previous quickfix item and center" })
 
 --------------------------------------------------
 -- 14. Find/Replace/Delete
@@ -175,7 +178,3 @@ keymap("n", "<leader>rg", [[:%s//gI<Left><Left><Left>]],
   { noremap = true, desc = "Replace arbitrary word globally" })
 keymap("n", "<leader>rgc", [[:.,$s//gc<Left><Left><Left>]],
   { noremap = true, desc = "Replace arbitrary word from cursor to EOF (confirm)" })
-keymap("n", "<leader>dw", [[:g/\<<C-r><C-w>\>/d<CR>]],
-  { noremap = true, silent = true, desc = "Delete all lines containing current word" })
-keymap("n", "<leader>df", [[:g//d<Left><Left>]],
-  { noremap = true, desc = "Delete all lines matching last search" })

@@ -9,13 +9,20 @@ return {
       preset = "default",
       -- Add <CR> (Enter) as ergonomic alternative to <C-y> for accepting
       ["<CR>"] = { "accept", "fallback" },
+
+      -- Documentation scrolling (doesn't conflict with insert mode defaults)
+      ["<C-f>"] = { "scroll_documentation_down", "fallback" },
+      ["<C-b>"] = { "scroll_documentation_up", "fallback" },
     },
     appearance = {
       use_nvim_cmp_as_default = true,
       nerd_font_variant = "mono",
     },
     completion = {
-      documentation = { auto_show = true, auto_show_delay_ms = 500 },
+      menu = {
+        border = "rounded",
+      },
+      documentation = { auto_show = true, auto_show_delay_ms = 500, window = { border = "rounded" } },
     },
     signature = { enabled = true },
     sources = {
