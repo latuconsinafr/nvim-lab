@@ -25,13 +25,13 @@ return {
     vim.g.db_ui_use_nerd_fonts = 1
     vim.g.db_ui_show_database_icon = 1
     vim.g.db_ui_execute_on_save = 0
-    vim.g.db_ui_winwidth = 40
+    vim.g.db_ui_winwidth = 45
     vim.g.db_ui_save_location = vim.fn.stdpath("data") .. "/dadbod_ui"
     vim.g.db_ui_auto_execute_table_helpers = 1
   end,
   config = function()
     local sidebar = require("settings.utils.sidebar")
-    local original_width = 40
+    local original_width = 45
     local step = 10
 
     -- Register dbuid as a sidebar

@@ -6,7 +6,7 @@ return {
   config = function()
     local view_module    = require("nvim-tree.view")
     local sidebar        = require("settings.utils.sidebar")
-    local original_width = 40
+    local original_width = 45
     local step           = 10
 
     require("nvim-tree").setup {
