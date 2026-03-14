@@ -32,14 +32,14 @@ return {
     -- Treesitter context (sticky header showing current scope)
     require("treesitter-context").setup({
       enable = true,
-      max_lines = 3,            -- Maximum lines to show in context
-      min_window_height = 0,    -- Minimum window height to enable context
-      line_numbers = true,      -- Show line numbers in context
-      multiline_threshold = 1,  -- Minimum lines for multiline context
-      trim_scope = "outer",     -- Remove outer blank lines from context
-      mode = "cursor",          -- Line to anchor context (cursor/topline)
-      separator = nil,          -- Character to use for separator (nil = disabled)
-      zindex = 20,              -- Z-index of context window
+      max_lines = 3,           -- Maximum lines to show in context
+      min_window_height = 0,   -- Minimum window height to enable context
+      line_numbers = true,     -- Show line numbers in context
+      multiline_threshold = 1, -- Minimum lines for multiline context
+      trim_scope = "outer",    -- Remove outer blank lines from context
+      mode = "cursor",         -- Line to anchor context (cursor/topline)
+      separator = nil,         -- Character to use for separator (nil = disabled)
+      zindex = 20,             -- Z-index of context window
     })
 
     -- Textobjects config (options only, no keymaps)
@@ -79,6 +79,8 @@ return {
       { desc = "Select outer loop" })
     vim.keymap.set({ "x", "o" }, "il", function() ts_select.select_textobject("@loop.inner", "textobjects") end,
       { desc = "Select inner loop" })
+    vim.keymap.set({ "x", "o" }, "i/", function() ts_select.select_textobject("@comment.inner", "textobjects") end,
+      { desc = "Select inner comment" })
     vim.keymap.set({ "x", "o" }, "a/", function() ts_select.select_textobject("@comment.outer", "textobjects") end,
       { desc = "Select outer comment" })
 

@@ -15,8 +15,8 @@ return {
     },
     { "<leader>da", "<cmd>DBUIAddConnection<CR>",     desc = "Add database connection" },
     { "<leader>dl", "<cmd>DBUILastQueryInfo<CR>",     desc = "Last query info" },
-    { "<leader>d]", desc = "Grow database UI width" },
-    { "<leader>d[", desc = "Shrink database UI width" },
+    { "<leader>d>", desc = "Grow database UI width" },
+    { "<leader>d<", desc = "Shrink database UI width" },
   },
   init = function()
     -- Prevent .psqlrc from interfering with metadata queries

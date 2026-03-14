@@ -99,12 +99,22 @@ vim.api.nvim_create_autocmd("LspAttach", {
     --------------------------------------------------
     -- Split window alternatives
     --------------------------------------------------
-    map("n", "<C-w>gd", function()
+    map("n", "<C-w>gds", function()
       vim.cmd.split()
       vim.lsp.buf.definition()
     end, "Go to definition in split")
 
-    map("n", "<C-w>gD", function()
+    map("n", "<C-w>gdv", function()
+      vim.cmd.vsplit()
+      vim.lsp.buf.definition()
+    end, "Go to definition in vsplit")
+
+    map("n", "<C-w>gDs", function()
+      vim.cmd.split()
+      vim.lsp.buf.declaration()
+    end, "Go to declaration in split")
+
+    map("n", "<C-w>gDv", function()
       vim.cmd.vsplit()
       vim.lsp.buf.declaration()
     end, "Go to declaration in vsplit")
